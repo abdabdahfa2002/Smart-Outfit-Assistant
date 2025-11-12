@@ -1,0 +1,27 @@
+
+{
+  "name": "Smart Outfit Assistant",
+  "short_name": "OutfitAI",
+  "description": "A smart wardrobe management application that uses AI to analyze your clothes and recommend outfits for any occasion. Upload pictures of your clothes, let the AI categorize them, and get personalized styling suggestions.",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#f9fafb",
+  "theme_color": "#2563eb",
+  "icons": [
+    {
+      "src": "/vite.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    },
+    {
+      "src": "/icons/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/icons/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

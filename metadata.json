@@ -1,0 +1,5 @@
+{
+  "name": "Smart Outfit Assistant",
+  "description": "A smart wardrobe management application that uses AI to analyze your clothes and recommend outfits for any occasion. Upload pictures of your clothes, let the AI categorize them, and get personalized styling suggestions.",
+  "requestFramePermissions": []
+}
