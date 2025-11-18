@@ -1,6 +1,7 @@
 
 import React, { useState, useCallback } from 'react';
 import { analyzeClothingItem } from '../services/geminiService';
+import { uploadImageToCloudinary } from '../services/uploadService';
 import { ClothingCategory, Formality, Season, ClothingItem, AnalyzedClothingItem, Gender, Fit, Layering } from '../types';
 import Spinner from './Spinner';
 
@@ -58,9 +59,15 @@ const AddItemModal: React.FC<AddItemModalProps> = ({ isOpen, onClose, onAddItem 
     setIsLoading(true);
     setError(null);
     try {
+      // 1. Upload image to Cloudinary via the secure backend API
+      const imageUrl = await uploadImageToCloudinary(file);
+      
+      // 2. Analyze the image using Gemini (still requires base64 for the Gemini service)
       const base64 = await fileToBase64(file);
       const result = await analyzeClothingItem(base64, file.type);
-      setAnalysis(result);
+      
+      // 3. Store the Cloudinary URL in the analysis state for later submission
+      setAnalysis({ ...result, imageUrl });
       setStep(2);
     } catch (err) {
       setError("Failed to analyze image. Please try again.");
@@ -82,10 +89,10 @@ const AddItemModal: React.FC<AddItemModalProps> = ({ isOpen, onClose, onAddItem 
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    const { name, category, gender, colors, tags, fabric, texture, season, formality, fit, layering } = analysis;
-    if (preview && name && category && gender && colors && tags && fabric && texture && season && formality && fit && layering) {
+    const { imageUrl, name, category, gender, colors, tags, fabric, texture, season, formality, fit, layering } = analysis;
+    if (imageUrl && name && category && gender && colors && tags && fabric && texture && season && formality && fit && layering) {
       onAddItem({
-        imageUrl: preview,
+        imageUrl, // Use the Cloudinary URL instead of the local preview URL
         name, category, gender, colors, tags, fabric, texture, season, formality, fit, layering
       });
       handleClose();
