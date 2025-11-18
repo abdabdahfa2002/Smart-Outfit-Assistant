@@ -1,4 +1,3 @@
-
 import { GoogleGenAI, Type, Modality } from "@google/genai";
 import { ClothingItem, AnalyzedClothingItem, UserProfile, ClothingCategory, Gender, Season, Formality, Fit, Layering } from '../types';
 
@@ -186,7 +185,7 @@ export const generateVirtualTryOn = async (userPhotoUrl: string, outfitItems: Cl
     `;
 
     const response = await ai.models.generateContent({
-        model: 'gemini-2.5-flash-image-001',
+        model: 'gemini-2.5-flash-image',
         contents: {
             parts: [
                 userImagePart,
