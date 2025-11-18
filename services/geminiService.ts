@@ -186,7 +186,7 @@ export const generateVirtualTryOn = async (userPhotoUrl: string, outfitItems: Cl
     `;
 
     const response = await ai.models.generateContent({
-        model: 'gemini-2.5-flash-image',
+        model: 'gemini-2.5-flash-image-001',
         contents: {
             parts: [
                 userImagePart,
